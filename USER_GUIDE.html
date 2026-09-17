@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OBSTool 完全操作ガイド</title>
+  <style>
+    :root { color-scheme: dark; --bg:#11111b; --panel:#181825; --panel2:#1e1e2e; --text:#cdd6f4; --muted:#a6adc8; --blue:#89b4fa; --green:#a6e3a1; --yellow:#f9e2af; --red:#f38ba8; --line:#45475a; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:"Segoe UI","Yu Gothic UI",Meiryo,sans-serif; line-height:1.75; }
+    a { color:var(--blue); }
+    code { background:#313244; border-radius:5px; padding:.12em .4em; overflow-wrap:anywhere; }
+    pre { overflow:auto; background:#0d0d16; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    pre code { padding:0; background:transparent; }
+    header { padding:48px 24px 36px; background:linear-gradient(135deg,#1e1e2e,#181825 55%,#24273a); border-bottom:1px solid var(--line); }
+    header .inner, main { max-width:1120px; margin:auto; }
+    h1 { margin:0 0 8px; font-size:clamp(2rem,5vw,3.2rem); color:#f5c2e7; }
+    header p { margin:6px 0; color:var(--muted); }
+    .layout { max-width:1400px; margin:auto; display:grid; grid-template-columns:280px minmax(0,1120px); gap:24px; padding:24px; align-items:start; }
+    nav { position:sticky; top:16px; max-height:calc(100vh - 32px); overflow:auto; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px; }
+    nav strong { display:block; margin-bottom:8px; color:var(--yellow); }
+    nav a { display:block; padding:5px 8px; color:var(--muted); text-decoration:none; border-radius:5px; }
+    nav a:hover { color:var(--text); background:#313244; }
+    main { width:100%; }
+    section { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:clamp(18px,3vw,32px); margin-bottom:22px; }
+    h2 { margin-top:0; color:var(--blue); border-bottom:1px solid var(--line); padding-bottom:8px; }
+    h3 { margin-top:1.8em; color:#cba6f7; }
+    h4 { color:var(--yellow); }
+    table { width:100%; border-collapse:collapse; margin:14px 0; }
+    th,td { border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top; }
+    th { background:#313244; color:var(--yellow); }
+    .callout { border-left:4px solid var(--blue); background:var(--panel2); border-radius:6px; padding:12px 16px; margin:16px 0; }
+    .warn { border-left-color:var(--yellow); }
+    .danger { border-left-color:var(--red); }
+    .ok { border-left-color:var(--green); }
+    .steps { counter-reset:step; list-style:none; padding:0; }
+    .steps > li { counter-increment:step; margin:12px 0; padding:10px 12px 10px 48px; position:relative; background:var(--panel2); border-radius:8px; }
+    .steps > li::before { content:counter(step); position:absolute; left:12px; top:10px; width:25px; height:25px; display:grid; place-items:center; border-radius:50%; background:var(--blue); color:#11111b; font-weight:700; }
+    details { background:var(--panel2); border:1px solid var(--line); border-radius:8px; margin:10px 0; padding:0 14px; }
+    summary { cursor:pointer; padding:13px 0; color:var(--yellow); font-weight:700; }
+    details > :not(summary) { margin-left:4px; }
+    .download { display:inline-block; margin:5px 8px 5px 0; padding:9px 14px; background:var(--blue); color:#11111b; border-radius:7px; text-decoration:none; font-weight:700; }
+    footer { color:var(--muted); text-align:center; padding:30px; }
+    @media (max-width:900px) { .layout { grid-template-columns:1fr; padding:12px; } nav { position:static; max-height:none; } }
+    @media print { :root { color-scheme:light; } body { background:white; color:#222; } header,section,nav { background:white; color:#222; border-color:#aaa; } .layout { display:block; padding:0; } nav { position:static; } a { color:#075aa6; } code,pre,th,.steps>li,.callout,details { background:#f3f3f3; color:#222; } section { break-inside:avoid-page; } }
+  </style>
+</head>
+<body>
+  <header><div class="inner">
+    <h1>OBSTool 完全操作ガイド</h1>
+    <p>DiscordのVC・発言状態・テキストチャットをOBSへ表示するWindows用ローカルアプリ</p>
+    <p>対象: OBSTool 1.0.17以降 / Windows 10・11（64bit）</p>
+  </div></header>
+
+  <div class="layout">
+    <nav aria-label="目次">
+      <strong>目次</strong>
+      <a href="#requirements">必要なもの</a>
+      <a href="#setup">初回セットアップ</a>
+      <a href="#discord">Discord連携設定</a>
+      <a href="#design">デザイン設定</a>
+      <a href="#preview">プレビューと配置</a>
+      <a href="#obs">OBSへの追加</a>
+      <a href="#daily">通常の使い方</a>
+      <a href="#security">権限・認証・保存</a>
+      <a href="#update">最新版への更新</a>
+      <a href="#trouble">トラブルシューティング</a>
+      <a href="#operator">配布者・管理者向け</a>
+    </nav>
+
+    <main>
+      <section id="requirements">
+        <h2>必要なもの</h2>
+        <ul>
+          <li>Windows 10 / 11（64bit）</li>
+          <li>Discordデスクトップ版</li>
+          <li>OBS Studio</li>
+          <li>インターネット接続</li>
+          <li>対象サーバーへ導入済みの専用Bot</li>
+        </ul>
+        <p>処理は利用者のPC上で動きます。常時稼働サーバー、Node.js、npmのインストールは不要です。ブラウザー版Discordだけでは本人認証と発言検知を利用できません。</p>
+        <p>
+          <a class="download" href="https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool.exe">最新版EXE</a>
+          <a class="download" href="https://github.com/kusaribito9310/obs_tool_distribute/releases/latest">配布ページ</a>
+        </p>
+      </section>
+
+      <section id="setup">
+        <h2>初回セットアップ</h2>
+        <ol class="steps">
+          <li>Discordデスクトップ版を起動し、配信で使用する本人のアカウントへログインします。</li>
+          <li><code>OBSTool.exe</code>を任意のフォルダーへ保存して起動します。インストール操作はありません。</li>
+          <li>初回だけDiscordの連携画面を承認します。通常の再起動では保存済み認証を使用します。</li>
+          <li>Discordの開発者モードを有効にし、対象サーバーを右クリックして「サーバーIDをコピー」します。</li>
+          <li>Guild IDへ貼り付けて「取得」を押し、カテゴリ・VC・テキストチャンネルを選びます。</li>
+          <li>「設定を保存して反映」を押します。</li>
+        </ol>
+        <div class="callout warn">SmartScreenが表示された場合は、GitHubの正式な配布ページから取得したことを確認し、「詳細情報」→「実行」を選択します。現在のexeはコード署名されていません。</div>
+      </section>
+
+      <section id="discord">
+        <h2>Discord連携設定</h2>
+        <h3>利用者と表示名</h3>
+        <p>画面上部には、Discordで本人確認できている利用者が表示されます。「表示名を強制更新」は、表示対象VCの参加者と表示済みチャット投稿者の名前・画像を即時取得します。自動確認は約15秒ごとです。</p>
+        <p>名前はサーバー内ニックネーム、Discord表示名、ユーザー名の順で採用します。キャラクター名を設定した場合は固定名が優先されます。</p>
+
+        <h3>カテゴリとチャンネル</h3>
+        <p>本人とBotの両方が閲覧できる対象だけが一覧へ表示されます。本人に権限がない鍵付きチャンネルは、Botが管理者でも表示されません。</p>
+        <table>
+          <thead><tr><th>項目</th><th>機能</th></tr></thead>
+          <tbody>
+            <tr><td>監視ボイスチャンネル</td><td>参加者と発言状態を表示します。</td></tr>
+            <tr><td>監視テキストチャンネル</td><td>新着メッセージと起動時の直近履歴を表示します。</td></tr>
+            <tr><td>Discordと同じ</td><td>Discord上のVC位置順です。</td></tr>
+            <tr><td>任意に並べる</td><td>上下ボタンでVCの順番を決めます。</td></tr>
+            <tr><td>50音順</td><td>日本語名を基準にVCを並べます。</td></tr>
+          </tbody>
+        </table>
+        <p>過去ログには本人とBotの「チャンネルを見る」「メッセージ履歴を読む」が必要です。新着本文にはBot側のMessage Content Intentも必要です。</p>
+
+        <h3>キャラクター差し替え</h3>
+        <ul>
+          <li><strong>表示キャラ名:</strong> Discord名の代わりに使う固定名</li>
+          <li><strong>立ち絵/画像URL:</strong> Discordアイコンの代わりに使う画像URL</li>
+        </ul>
+        <p>PCから直接開けるHTTPS画像を推奨します。期限付きURL、ログインが必要なURL、WebページのURLは表示できないことがあります。</p>
+      </section>
+
+      <section id="design">
+        <h2>デザイン設定</h2>
+        <h3>表示方法</h3>
+        <ul>
+          <li><strong>テキストチャットを1つの枠にまとめる:</strong> 全選択チャンネルを時系列表示します。</li>
+          <li><strong>VCをチャンネルごとに分割表示:</strong> VC別に独立配置できます。</li>
+          <li><strong>テキストをチャンネルごとに分割表示:</strong> テキストチャンネル別に独立配置できます。</li>
+          <li><strong>VC参加者を画像メインで表示:</strong> 立ち絵向け表示へ切り替えます。</li>
+        </ul>
+        <p>「1つの枠にまとめる」と「テキストをチャンネルごとに分割表示」を両方有効にした場合は、1つの枠にまとめる設定を優先します。</p>
+        <table>
+          <thead><tr><th>画像の並べ方</th><th>動作</th></tr></thead>
+          <tbody>
+            <tr><td>グリッド</td><td>枠内へ格子状に並べます。</td></tr>
+            <tr><td>横一列</td><td>参加者を横方向へ並べます。</td></tr>
+            <tr><td>キャラ別の自由配置</td><td>各参加者をドラッグできます。クリックした参加者が手前になります。</td></tr>
+          </tbody>
+        </table>
+
+        <h3>発言中の演出</h3>
+        <p>「跳ねる」「発光・ネオン」「拡大」は複数同時に使えます。拡大倍率は1.00～2.00倍、発光色と発光対象、非発言時グレーの強さも設定できます。</p>
+
+        <h3>色と透明度</h3>
+        <p>VC枠・チャット枠の背景色、透明度、文字色を個別に設定できます。透明度Aは0で完全透明、1で不透明です。</p>
+      </section>
+
+      <section id="preview">
+        <h2>プレビューと配置</h2>
+        <p>右側のプレビューは1920×1080基準です。</p>
+        <table>
+          <thead><tr><th>操作</th><th>結果</th></tr></thead>
+          <tbody>
+            <tr><td>枠をドラッグ</td><td>位置を移動します。</td></tr>
+            <tr><td>辺・四隅をドラッグ</td><td>幅・高さを変更します。</td></tr>
+            <tr><td>Shift＋辺・四隅をドラッグ</td><td>縦横比を保って内容全体を拡大・縮小します。</td></tr>
+            <tr><td>自由配置のキャラをドラッグ</td><td>参加者を個別に移動します。</td></tr>
+            <tr><td>位置リセット</td><td>枠とキャラクター個別配置を初期位置へ戻します。</td></tr>
+          </tbody>
+        </table>
+        <p>数値欄ではX・Y座標、横幅、高さ、拡大率、立ち絵の高さ、画像の重なりを調整できます。高さ0は自動です。分割表示では上部のチャンネルボタンから編集対象を選びます。</p>
+        <p>設定欄とプレビュー欄の間にある縦線を左右へドラッグすると、画面上の表示幅を調整できます。この幅調整はOBSの配置値には影響しません。</p>
+        <div class="callout">プレビューへの変更は即時反映されます。再起動後も残すには「設定を保存して反映」を押してください。</div>
+      </section>
+
+      <section id="obs">
+        <h2>OBSへの追加</h2>
+        <ol class="steps">
+          <li>OBSToolを起動したままにします。</li>
+          <li>OBSで「ブラウザ」ソースを追加します。</li>
+          <li>URLへ <code>http://localhost:8080/overlay</code> を入力します。</li>
+          <li>幅を1920、高さを1080にします。</li>
+          <li>必要に応じて「現在のページのキャッシュを更新」を実行します。</li>
+        </ol>
+        <div class="callout warn">OBS用URLへ<code>?mode=editor</code>は付けません。これはOBSTool内部の編集プレビュー専用です。OBSToolを終了するとOBS表示も停止します。</div>
+      </section>
+
+      <section id="daily">
+        <h2>通常の使い方</h2>
+        <p>Discordデスクトップ版 → OBSTool → OBS Studioの順で起動します。</p>
+        <p>「一時停止」は通常の状態配信を止め、「再開する」で現在状態と履歴を再送します。権限剥奪、アカウント変更、Discord切断時は安全のため一時停止中でも表示を解除します。</p>
+        <p>チャットは時間経過、名前更新、VC状態更新、配置・テーマ変更では消えません。選択解除、権限解除、切断、OBSブラウザソースの再読み込み、アプリ再起動では消える場合があります。</p>
+      </section>
+
+      <section id="security">
+        <h2>権限・認証・保存の仕組み</h2>
+        <h3>閲覧権限</h3>
+        <p>Discordデスクトップ版で本人を確認し、Bot経由で本人のロールとチャンネル個別権限を判定します。権限は約30秒ごとにも確認します。一時的な通信失敗では確認済み表示を維持し、実際の権限変更・アクセス拒否・アカウント変更・DiscordまたはBot切断時に解除します。</p>
+        <h3>保存場所</h3>
+        <table>
+          <thead><tr><th>内容</th><th>場所</th></tr></thead>
+          <tbody>
+            <tr><td>表示・チャンネル設定</td><td><code>%APPDATA%\obs-discord-overlay\user_config.json</code></td></tr>
+            <tr><td>暗号化Discord認証</td><td><code>%APPDATA%\obs-discord-overlay\rpc-auth.bin</code></td></tr>
+            <tr><td>現在のログ</td><td><code>%APPDATA%\obs-discord-overlay\logs\app.log</code></td></tr>
+            <tr><td>前回ログ</td><td><code>%APPDATA%\obs-discord-overlay\logs\app.previous.log</code></td></tr>
+          </tbody>
+        </table>
+        <p><kbd>Win</kbd> + <kbd>R</kbd>でパスを貼り付けると開けます。認証ファイルは同じWindowsユーザーでのみ復号できます。</p>
+      </section>
+
+      <section id="update">
+        <h2>最新版への更新</h2>
+        <p><a class="download" href="https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool-update.exe">最新版の更新パッチ</a></p>
+        <ol class="steps">
+          <li>OBSToolを終了します。</li>
+          <li><code>OBSTool-update.exe</code>を起動します。</li>
+          <li>「参照」で現在使用しているOBSTool exeを選びます。</li>
+          <li>「更新する」を押します。</li>
+        </ol>
+        <p>どの旧版からでもパッチ内蔵の最新版へ直接更新します。更新前のexeは同じフォルダーへ<code>.bak</code>として保存され、AppDataの設定と認証は維持されます。パッチは将来版をオンライン取得しないため、毎回最新のパッチを取得してください。</p>
+      </section>
+
+      <section id="trouble">
+        <h2>トラブルシューティング</h2>
+        <details open><summary>SmartScreenで「WindowsによってPCが保護されました」</summary><p>正式なGitHub配布ページから取得したことを確認し、「詳細情報」→「実行」を選択します。未署名exeのため警告される場合があります。自己署名だけでは配布先で信頼登録しない限り解消しません。</p></details>
+        <details><summary>起動しない / 8080番ポート使用中</summary><ul><li>既存のOBSToolを終了します。</li><li>開発版はターミナルで<code>Ctrl + C</code>を押します。</li><li>タスクマネージャーで残ったOBSTool/Electronを確認します。</li><li>8080番を使う別アプリを終了します。</li></ul></details>
+        <details><summary>Discord認証を何度も求められる</summary><ol><li>Discordデスクトップ版へ本人のアカウントでログインします。</li><li>Discordを先に、OBSToolを後に起動します。</li><li>再承認する場合はOBSTool終了後に<code>%APPDATA%\obs-discord-overlay\rpc-auth.bin</code>だけを削除します。</li></ol></details>
+        <details><summary>「本人の閲覧権限を確認中…」から進まない</summary><ul><li>1.0.17以降へ更新します。</li><li>Botが対象サーバーでオンラインか確認します。</li><li>本人のサーバー参加とサーバーIDを確認します。</li><li>Discord・ネットワーク接続を確認し、「取得」を押し直します。</li></ul></details>
+        <details><summary>カテゴリやチャンネルが出ない</summary><p>本人とBotの両方に「チャンネルを見る」が必要です。カテゴリと子チャンネルの権限が非同期なら子側も確認します。ロール変更後は最大30秒ほど待つか再取得します。</p></details>
+        <details><summary>選択が消える / 元に戻る</summary><p>1.0.17以降へ更新し、最後に「設定を保存して反映」を押します。実際に閲覧権限が外れた対象は安全のため除外されます。1.0.17以降は定期確認、初回取得、Bot再接続、保存前の再取得で選択を維持します。</p></details>
+        <details><summary>OBSに何も表示されない</summary><ul><li>OBSToolを起動したままにします。</li><li>URLを<code>http://localhost:8080/overlay</code>、幅1920、高さ1080にします。</li><li>対象チャンネルを選択して保存します。</li><li>ブラウザソースのキャッシュを更新します。</li></ul></details>
+        <details><summary>VCの発言演出が動かない</summary><p>Discordデスクトップ版、対象VCの選択、演出チェック、RPC接続を確認します。ログにRPC切断がないかも確認してください。</p></details>
+        <details><summary>テキストチャットが表示されない</summary><p>選択と保存、本人・Botの閲覧権限、履歴権限、BotのMessage Content Intentを確認します。Bot自身の投稿は表示しません。</p></details>
+        <details><summary>表示名が変わらない</summary><p>「表示名を強制更新」を押します。キャラクター名が設定されている場合は固定名が優先されます。</p></details>
+        <details><summary>画像・立ち絵が表示されない</summary><p>ログイン不要で直接開けるHTTPS画像URLを使います。URL期限、アクセス制限、WebページURLになっていないか確認し、OBSキャッシュを更新します。</p></details>
+        <details><summary>チャットが消えた</summary><p>時間経過だけでは消えません。権限・選択解除、切断、OBS再読み込み、アプリ再起動では消えます。起動時は選択チャンネルの直近履歴を最大5件ずつ取得します。</p></details>
+        <details><summary>更新パッチが失敗する</summary><ul><li>対象OBSToolを終了します。</li><li>対象exe名に<code>OBSTool</code>を含めます。</li><li>書き込み権限と空き容量を確認します。</li><li>最新パッチでも失敗する場合は通常版EXEへ置き換えます。</li></ul></details>
+        <details><summary>ログが文字化けする</summary><p>1.0.16以降の<code>npm start</code>はUTF-8へ切り替えます。配布版や外部収集で文字化けするときは、UTF-8 BOM付きの<code>%APPDATA%\obs-discord-overlay\logs\app.log</code>をメモ帳で開きます。</p></details>
+        <details><summary>設定を初期化したい</summary><p>OBSToolを終了してAppDataフォルダーをバックアップします。表示設定は<code>user_config.json</code>、Discord承認は<code>rpc-auth.bin</code>を削除すると個別に初期化できます。</p></details>
+        <h3>問題報告に必要な情報</h3>
+        <ul><li>OBSToolのバージョン</li><li>発生時刻</li><li>操作手順</li><li>画面メッセージ</li><li><code>app.log</code></li></ul>
+        <div class="callout danger"><code>user_config.json</code>には設定や認証情報が含まれる場合があります。そのまま公開しないでください。</div>
+      </section>
+
+      <section id="operator">
+        <h2>配布者・管理者向け</h2>
+        <h3>Discord側</h3>
+        <ul><li>DiscordアプリケーションとBotを用意し、対象サーバーへ一度招待します。</li><li>必要チャンネルの閲覧・履歴取得権限を付与します。</li><li>Message Content Intentを有効にします。</li><li>RPC/OAuthで<code>rpc</code>と<code>identify</code>を利用できる状態にします。</li></ul>
+        <p>Botの管理者権限は必須ではなく、OBSToolのDiscordスラッシュコマンドはありません。</p>
+        <h3>環境変数</h3>
+        <pre><code>DISCORD_BOT_TOKEN=
+DISCORD_RPC_CLIENT_ID=
+DISCORD_RPC_CLIENT_SECRET=
+DISCORD_RPC_REDIRECT_URI=http://127.0.0.1</code></pre>
+        <div class="callout danger">現在は<code>.env</code>をexeへ同梱します。画面で非表示でもBot TokenやClient Secretを抽出できるため、信頼できる相手だけへ配布してください。</div>
+        <h3>開発・ビルド</h3>
+        <pre><code>npm ci --include=dev
+npm start
+build.cmd --no-pause
+publish-github.cmd</code></pre>
+        <table><thead><tr><th>生成物</th><th>場所</th></tr></thead><tbody>
+          <tr><td>最新版</td><td><code>dist/latest/OBSTool.exe</code></td></tr>
+          <tr><td>全旧版対応パッチ</td><td><code>dist/latest/OBSTool-update.exe</code></td></tr>
+          <tr><td>バージョン別保管</td><td><code>releases/バージョン/SHA256/</code></td></tr>
+        </tbody></table>
+        <p>配布用の通常exeと更新パッチは、このリポジトリの最新Releaseから取得できます。</p>
+      </section>
+    </main>
+  </div>
+  <footer>OBSTool 完全操作ガイド — このHTMLは外部ライブラリなしで単体表示・印刷できます。</footer>
+</body>
+</html>
