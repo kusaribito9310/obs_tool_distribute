@@ -50,7 +50,7 @@
   <header><div class="inner">
     <h1>OBSTool 完全操作ガイド</h1>
     <p>DiscordのVC・発言状態・テキストチャットをOBSへ表示するWindows用ローカルアプリ</p>
-    <p>対象: OBSTool 1.0.17以降 / Windows 10・11（64bit）</p>
+    <p>対象: OBSTool 1.0.18以降 / Windows 10・11（64bit）</p>
   </div></header>
 
   <div class="layout">
@@ -135,6 +135,8 @@
           <li><strong>VCをチャンネルごとに分割表示:</strong> VC別に独立配置できます。</li>
           <li><strong>テキストをチャンネルごとに分割表示:</strong> テキストチャンネル別に独立配置できます。</li>
           <li><strong>VC参加者を画像メインで表示:</strong> 立ち絵向け表示へ切り替えます。</li>
+          <li><strong>各チャンネルのタイトルを表示:</strong> オフにするとVC・テキストチャンネルの見出しを隠します。</li>
+          <li><strong>VC参加者の名前を表示:</strong> オフにすると参加者名を隠します。画像表示の名前は画像下部で複数行に折り返します。</li>
         </ul>
         <p>「1つの枠にまとめる」と「テキストをチャンネルごとに分割表示」を両方有効にした場合は、1つの枠にまとめる設定を優先します。</p>
         <table>
@@ -142,7 +144,7 @@
           <tbody>
             <tr><td>グリッド</td><td>枠内へ格子状に並べます。</td></tr>
             <tr><td>横一列</td><td>参加者を横方向へ並べます。</td></tr>
-            <tr><td>キャラ別の自由配置</td><td>各参加者をドラッグできます。クリックした参加者が手前になります。</td></tr>
+            <tr><td>キャラ別の自由配置</td><td>各参加者をドラッグできます。クリックした参加者が手前になります。右端の青いハンドルで横幅、右下のピンク色ハンドルで縦横比を保った拡大・縮小ができます。</td></tr>
           </tbody>
         </table>
 
@@ -150,7 +152,8 @@
         <p>「跳ねる」「発光・ネオン」「拡大」は複数同時に使えます。拡大倍率は1.00～2.00倍、発光色と発光対象、非発言時グレーの強さも設定できます。</p>
 
         <h3>色と透明度</h3>
-        <p>VC枠・チャット枠の背景色、透明度、文字色を個別に設定できます。透明度Aは0で完全透明、1で不透明です。</p>
+        <p>VC枠・チャット枠の背景色、透明度、文字色を個別に設定できます。画像メイン表示では「画像の名前背景」で画像下の名前ラベルの色と透明度を、「画像の名前サイズ」で文字サイズ（8～72px）を指定します。文字色は「VC文字色」を使います。名前を隠すには「VC参加者の名前を表示」をオフにします。</p>
+        <p>透明度Aは0で完全透明、1で不透明です。VC枠・チャット枠・画像の名前背景のスライダーと数値欄は連動し、0.01刻みで入力できます。変更はすぐプレビューに反映され、再起動後も残すには「設定を保存して反映」を押します。</p>
       </section>
 
       <section id="preview">
@@ -163,6 +166,8 @@
             <tr><td>辺・四隅をドラッグ</td><td>幅・高さを変更します。</td></tr>
             <tr><td>Shift＋辺・四隅をドラッグ</td><td>縦横比を保って内容全体を拡大・縮小します。</td></tr>
             <tr><td>自由配置のキャラをドラッグ</td><td>参加者を個別に移動します。</td></tr>
+            <tr><td>自由配置のキャラ右端をドラッグ</td><td>画像幅を変更します。名前の折り返しと選択範囲も追従します。</td></tr>
+            <tr><td>自由配置のキャラ右下をドラッグ</td><td>画像を縦横比を保ったまま拡大・縮小します。</td></tr>
             <tr><td>位置リセット</td><td>枠とキャラクター個別配置を初期位置へ戻します。</td></tr>
           </tbody>
         </table>
@@ -187,7 +192,7 @@
         <h2>通常の使い方</h2>
         <p>Discordデスクトップ版 → OBSTool → OBS Studioの順で起動します。</p>
         <p>「一時停止」は通常の状態配信を止め、「再開する」で現在状態と履歴を再送します。権限剥奪、アカウント変更、Discord切断時は安全のため一時停止中でも表示を解除します。</p>
-        <p>チャットは時間経過、名前更新、VC状態更新、配置・テーマ変更では消えません。選択解除、権限解除、切断、OBSブラウザソースの再読み込み、アプリ再起動では消える場合があります。</p>
+        <p>チャットは時間経過、名前更新、VC状態更新、配置・テーマ変更、ローカル配信接続の一時切断では消えません。チャンネルを切り替えると対象外の履歴は隠れ、同じチャンネルを再選択すると保持していた履歴を再表示します。権限解除・アカウント変更による表示リセット、OBSブラウザソースの再読み込み、アプリ再起動では履歴が消えます。</p>
       </section>
 
       <section id="security">
@@ -202,6 +207,7 @@
             <tr><td>暗号化Discord認証</td><td><code>%APPDATA%\obs-discord-overlay\rpc-auth.bin</code></td></tr>
             <tr><td>現在のログ</td><td><code>%APPDATA%\obs-discord-overlay\logs\app.log</code></td></tr>
             <tr><td>前回ログ</td><td><code>%APPDATA%\obs-discord-overlay\logs\app.previous.log</code></td></tr>
+            <tr><td>UTF-8ではなかった旧ログ</td><td><code>%APPDATA%\obs-discord-overlay\logs\app.invalid-encoding.log</code></td></tr>
           </tbody>
         </table>
         <p><kbd>Win</kbd> + <kbd>R</kbd>でパスを貼り付けると開けます。認証ファイルは同じWindowsユーザーでのみ復号できます。</p>
@@ -234,7 +240,7 @@
         <details><summary>画像・立ち絵が表示されない</summary><p>ログイン不要で直接開けるHTTPS画像URLを使います。URL期限、アクセス制限、WebページURLになっていないか確認し、OBSキャッシュを更新します。</p></details>
         <details><summary>チャットが消えた</summary><p>時間経過だけでは消えません。権限・選択解除、切断、OBS再読み込み、アプリ再起動では消えます。起動時は選択チャンネルの直近履歴を最大5件ずつ取得します。</p></details>
         <details><summary>更新パッチが失敗する</summary><ul><li>対象OBSToolを終了します。</li><li>対象exe名に<code>OBSTool</code>を含めます。</li><li>書き込み権限と空き容量を確認します。</li><li>最新パッチでも失敗する場合は通常版EXEへ置き換えます。</li></ul></details>
-        <details><summary>ログが文字化けする</summary><p>1.0.16以降の<code>npm start</code>はUTF-8へ切り替えます。配布版や外部収集で文字化けするときは、UTF-8 BOM付きの<code>%APPDATA%\obs-discord-overlay\logs\app.log</code>をメモ帳で開きます。</p></details>
+        <details><summary>ログが文字化けする</summary><p>1.0.16以降の<code>npm start</code>はUTF-8へ切り替えます。配布版や外部収集で文字化けするときは、UTF-8 BOM付きの<code>%APPDATA%\obs-discord-overlay\logs\app.log</code>をメモ帳で開きます。UTF-8として読み込めない旧ログは起動時に<code>app.invalid-encoding.log</code>へ退避され、新しいログが作成されます。</p></details>
         <details><summary>設定を初期化したい</summary><p>OBSToolを終了してAppDataフォルダーをバックアップします。表示設定は<code>user_config.json</code>、Discord承認は<code>rpc-auth.bin</code>を削除すると個別に初期化できます。</p></details>
         <h3>問題報告に必要な情報</h3>
         <ul><li>OBSToolのバージョン</li><li>発生時刻</li><li>操作手順</li><li>画面メッセージ</li><li><code>app.log</code></li></ul>
@@ -262,7 +268,7 @@ publish-github.cmd</code></pre>
           <tr><td>全旧版対応パッチ</td><td><code>dist/latest/OBSTool-update.exe</code></td></tr>
           <tr><td>バージョン別保管</td><td><code>releases/バージョン/SHA256/</code></td></tr>
         </tbody></table>
-        <p>配布用の通常exeと更新パッチは、このリポジトリの最新Releaseから取得できます。</p>
+        <p><a href="https://github.com/kusaribito9310/obs_tool_distribute/releases/latest">配布ファイルと更新パッチのダウンロードページ</a></p>
       </section>
     </main>
   </div>
