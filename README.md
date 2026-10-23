@@ -8,6 +8,7 @@ DiscordのVC参加者とテキストチャットを、OBSのブラウザソー�
 - [従来の単体EXE OBSTool.exe](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool.exe)
 - [従来の単体EXE向け・全旧バージョン対応パッチ](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool-update.exe)
 - [1.0.24の署名付きアプリ内更新データ](https://github.com/kusaribito9310/obs_tool_distribute/releases/download/v1.0.24/OBSTool-1.0.24.obstool-update)
+- [全配布ファイル・リリースノート](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest)
 
 初めて使う場合はインストーラーを1つダウンロードしてください。セットアップ中にデスクトップ・スタートメニューへの追加を個別に選べます。必要な実行環境を同梱しており、Node.jsなどの追加インストールは不要です。
 
