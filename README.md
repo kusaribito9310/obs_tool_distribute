@@ -1,13 +1,13 @@
 # OBSTool 配布ページ
 
-DiscordのVC参加者とテキストチャットを、OBSのブラウザソースへ表示するWindows用ツールです。最新版は **1.0.25** です。
+DiscordのVC参加者とテキストチャットを、OBSのブラウザソースへ表示するWindows用ツールです。最新版は **1.0.26** です。
 
 ## ダウンロード
 
 - **[推奨：インストーラー OBSTool-Setup.exe](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool-Setup.exe)**
 - [従来の単体EXE OBSTool.exe](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool.exe)
 - [従来の単体EXE向け・全旧バージョン対応パッチ](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool-update.exe)
-- [1.0.25の署名付きアプリ内更新データ](https://github.com/kusaribito9310/obs_tool_distribute/releases/download/v1.0.25/OBSTool-1.0.25.obstool-update)
+- [1.0.26の署名付きアプリ内更新データ](https://github.com/kusaribito9310/obs_tool_distribute/releases/download/v1.0.26/OBSTool-1.0.26.obstool-update)
 - [全配布ファイル・リリースノート](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest)
 
 初めて使う場合はインストーラーを1つダウンロードしてください。セットアップ中にデスクトップ・スタートメニューへの追加を個別に選べます。必要な実行環境を同梱しており、Node.jsなどの追加インストールは不要です。
@@ -25,7 +25,8 @@ DiscordのVC参加者とテキストチャットを、OBSのブラウザソー�
 ## 主な機能
 
 - インストール時にショートカットの作成先を選べます。インストール先の `Uninstall OBSTool.exe`、またはWindowsの「インストールされているアプリ」から削除できます。設定・プリセット・認証情報は残します。
-- プリセットは `%APPDATA%\obs-discord-overlay\presets` に名前を付けて保存し、一覧から選んで読み込めます。保存フォルダを開いたり、外部のJSONを取り込んだりできます。
+- 実行中のバージョンは操作画面の左下とウィンドウタイトルに表示します。
+- 「設定」→「プリセット」で保存・読み込み・外部JSONの取り込みができます。同名の保存・取り込みでは上書き確認を表示し、キャンセルすれば元の内容を残します。同名が複数ある場合は最新の1件が対象です。保存先は `%APPDATA%\obs-discord-overlay\presets` です。
 - 登録ユーザーの「変更」でID・名前・画像を編集できます。IDを変更しても位置・サイズを引き継ぎ、変更先に設定がある場合は上書きを止めます。
 - IDが未定なら空欄で仮ユーザーを追加し、仮アイコンや画像で事前配置できます。後からIDを指定しても配置を引き継ぎます。仮ユーザーはプレビュー専用です。
 - 設定の保存に失敗した場合は変更前の設定を維持します。正常な設定を1世代バックアップし、設定ファイルの破損・欠落時にはバックアップを読み込みます。
