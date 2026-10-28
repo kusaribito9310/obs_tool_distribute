@@ -84,6 +84,7 @@
 <h3>VC画像と参加前の配置</h3><p>画像メイン表示は、空のVCも画像と名前欄の高さを確保し、全チャンネルの高さを揃えます。横幅は手動調整できますが、画像が収まる幅が下限です。長い名前・グリッドの複数行・保存した個別配置に高さが必要な場合も全チャンネルを揃えます。</p>
 <p>参加前のユーザーは「+ ユーザーを追加」でDiscordユーザーIDを登録し、画像URLを入力します。画像メイン・キャラ別の自由配置にすると、プレビュー限定の「事前設定」表示から位置とサイズを準備できます。OBSには実際にVCへ参加した時点で表示され、同じユーザーIDの設定を適用します。</p>
 <p>登録した相手を変更する場合は、対象行の「変更」からユーザーID・表示キャラ名・画像URLを編集し、「変更する」→「保存して反映」で確定します。IDを変更しても個別の位置・幅・画像の高さを引き継ぎます。名前が空欄なら変更先のDiscord表示名を使います。変更先に登録や配置設定がある場合は上書きせず中止し、キャンセル時も元の設定を維持します。</p>
+<p>IDが未定なら空欄のまま「+ ユーザーを追加」を押すと、仮ユーザーを複数追加できます。画像がなくても仮アイコンで配置を確認できます。「画像メイン」＋「個別配置」で調整し、「保存して反映」で保存します。後から「変更」でIDを指定しても画像・名前・配置を引き継ぎ、IDを空欄に戻しても配置を保持します。仮ユーザーはプリセットにも保存されます。仮ユーザーや未参加者はプレビュー専用で、OBS本番には実際の参加者だけを表示します。</p>
 <p>非発言時のグレースケールは色だけを変え、画像の透明度を下げません。「発言中に拡大」は話している間は倍率を維持し、発話が終了すると元へ戻ります。</p>
 <h3>チャットの定期更新</h3><p>Discordの定期的な権限・表示名確認でチャットの枠を作り直さないようにしました。同じ設定の通知では表示済みメッセージ、画像、スクロール位置を維持します。</p></section>
 
@@ -225,6 +226,7 @@
           <thead><tr><th>内容</th><th>場所</th></tr></thead>
           <tbody>
             <tr><td>表示・チャンネル設定</td><td><code>%APPDATA%\obs-discord-overlay\user_config.json</code></td></tr>
+            <tr><td>前回の正常な設定</td><td><code>%APPDATA%\obs-discord-overlay\user_config.json.bak</code></td></tr>
             <tr><td>暗号化Discord認証</td><td><code>%APPDATA%\obs-discord-overlay\rpc-auth.bin</code></td></tr>
             <tr><td>現在のログ</td><td><code>%APPDATA%\obs-discord-overlay\logs\app.log</code></td></tr>
             <tr><td>前回ログ</td><td><code>%APPDATA%\obs-discord-overlay\logs\app.previous.log</code></td></tr>
@@ -232,6 +234,7 @@
           </tbody>
         </table>
         <p><kbd>Win</kbd> + <kbd>R</kbd>でパスを貼り付けると開けます。認証ファイルは同じWindowsユーザーでのみ復号できます。</p>
+        <p>設定保存時には前回の正常な設定をバックアップします。設定ファイルが破損・欠落している場合はバックアップを読み込みます。保存に失敗した場合は変更前の設定を維持するため、空き容量や書き込み権限を確認して再度保存してください。</p>
       </section>
 
       <section id="update">
@@ -263,10 +266,10 @@
         <details><summary>チャットが消えた</summary><p>時間経過だけでは消えません。権限・選択解除、切断、OBS再読み込み、アプリ再起動では消えます。起動時は選択チャンネルの直近履歴を最大5件ずつ取得します。</p></details>
         <details><summary>更新パッチが失敗する</summary><ul><li>対象OBSToolを終了します。</li><li>対象exe名に<code>OBSTool</code>を含めます。</li><li>書き込み権限と空き容量を確認します。</li><li>最新パッチでも失敗する場合は通常版EXEへ置き換えます。</li></ul></details>
         <details><summary>ログが文字化けする</summary><p>1.0.16以降の<code>npm start</code>はUTF-8へ切り替えます。配布版や外部収集で文字化けするときは、UTF-8 BOM付きの<code>%APPDATA%\obs-discord-overlay\logs\app.log</code>をメモ帳で開きます。UTF-8として読み込めない旧ログは起動時に<code>app.invalid-encoding.log</code>へ退避され、新しいログが作成されます。</p></details>
-        <details><summary>設定を初期化したい</summary><p>OBSToolを終了してAppDataフォルダーをバックアップします。表示設定は<code>user_config.json</code>、Discord承認は<code>rpc-auth.bin</code>を削除すると個別に初期化できます。</p></details>
+        <details><summary>設定を初期化したい</summary><p>OBSToolを終了してAppDataフォルダーをバックアップします。表示設定は<code>user_config.json</code>と、存在する場合は<code>user_config.json.bak</code>、Discord承認は<code>rpc-auth.bin</code>を削除すると個別に初期化できます。</p></details>
         <h3>問題報告に必要な情報</h3>
         <ul><li>OBSToolのバージョン</li><li>発生時刻</li><li>操作手順</li><li>画面メッセージ</li><li><code>app.log</code></li></ul>
-        <div class="callout danger"><code>user_config.json</code>には設定や認証情報が含まれる場合があります。そのまま公開しないでください。</div>
+        <div class="callout danger"><code>user_config.json</code>と<code>user_config.json.bak</code>には設定や認証情報が含まれる場合があります。そのまま公開しないでください。</div>
       </section>
 
       <section id="operator">

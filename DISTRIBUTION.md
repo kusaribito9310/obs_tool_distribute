@@ -25,7 +25,7 @@ Bot Token・RPC Client ID・RPC Client Secretの入力欄や説明は表示さ�
 
 アプリを終了してから、新しいexeに差し替えて起動してください。OBSで表示が戻らない場合はブラウザソースを再読み込みしてください。設定はWindowsユーザーのAppData内のアプリ用フォルダーにある `user_config.json` に保存され、exeを差し替えても残ります。exeだけを別のPCに移しても保存設定は移りません。
 
-保存済みの設定は同梱 `.env` より優先されます。配布者が認証情報を変更しても以前の認証情報が使われる場合は、アプリを終了して `user_config.json` をバックアップし、保存されている `botToken`・`rpcClientId`・`rpcClientSecret`・`rpcAuth` の項目を削除してから起動してください。ファイル全体を削除すると、表示やチャンネルの設定も初期化されます。
+保存済みの設定は同梱 `.env` より優先されます。配布者が認証情報を変更しても以前の認証情報が使われる場合は、アプリを終了して `user_config.json` をバックアップし、保存されている `botToken`・`rpcClientId`・`rpcClientSecret`・`rpcAuth` の項目を削除してから起動してください。設定は保存時に `user_config.json.bak` へ1世代バックアップされ、本体の破損・欠落時にはバックアップを読み込みます。表示やチャンネルの設定も初期化する場合は、`user_config.json` と、存在する場合は `user_config.json.bak` の両方を削除します。
 
 ## 配布者のビルド手順
 
