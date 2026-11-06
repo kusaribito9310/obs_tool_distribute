@@ -101,6 +101,7 @@
         <p>処理は利用者のPC上で動きます。常時稼働サーバー、Node.js、npmのインストールは不要です。ブラウザー版Discordだけでは本人認証と発言検知を利用できません。</p>
         <p>
           <a class="download" href="https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool-Setup.exe">推奨：最新版インストーラー</a>
+          <a class="download" href="https://github.com/kusaribito9310/obs_tool_distribute/releases/download/v1.0.27/OBSTool-1.0.27-folder.zip">インストール不要：ZIP版（実行環境・操作ガイド一式）</a>
           <a class="download" href="https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool.exe">従来の単体EXE</a>
           <a class="download" href="https://github.com/kusaribito9310/obs_tool_distribute/releases/latest">配布ページ</a>
         </p>
@@ -111,6 +112,7 @@
         <ol class="steps">
           <li>Discordデスクトップ版を起動し、配信で使用する本人のアカウントへログインします。</li>
           <li><code>OBSTool-Setup.exe</code>を起動してインストール先とショートカットを選び、導入後にOBSToolを起動します。インストール先には <code>Uninstall OBSTool.exe</code> も作成されます。従来の単体EXEは任意のフォルダーへ保存して直接起動できます。</li>
+          <li>インストーラーを使わない場合はZIP版を右クリック→「すべて展開」で解凍し、<code>OBSTool-folder</code> 内の <code>OBSTool.exe</code> を起動してください。EXEだけを取り出さず、フォルダ全体を保持します。操作ガイドは <code>START_HERE.html</code>、ZIP版の案内は <code>README-ZIP.txt</code> に同梱しています。設定・認証情報はインストーラー版と同じ保存先を使うため、切り替え前に起動中のOBSToolを終了してください。</li>
           <li>初回だけDiscordの連携画面を承認します。通常の再起動では保存済み認証を使用します。</li>
           <li>Discordの開発者モードを有効にし、対象サーバーを右クリックして「サーバーIDをコピー」します。</li>
           <li>Guild IDへ貼り付けて「取得」を押し、カテゴリ・VC・テキストチャンネルを選びます。</li>
@@ -239,7 +241,7 @@
 
       <section id="update">
         <h2>最新版への更新</h2>
-        <p>インストーラー版は「設定」→「アプリの更新」を1回押すだけで、新しい正式版があればGitHubから取得・署名検証して自動再起動します。更新がなければそのまま使えます。手動ファイルや復元は「手動更新・復元」から操作します。以下の旧形式パッチは従来の単体EXE専用で、インストーラー版の本体には使用しないでください。</p>
+        <p>インストーラー版・ZIP版は「設定」→「アプリの更新」を1回押すだけで、新しい正式版があればGitHubから取得・署名検証して自動再起動します。更新がなければそのまま使えます。手動ファイルや復元は「手動更新・復元」から操作します。以下の旧形式パッチは従来の単体EXE専用で、インストーラー版の本体には使用しないでください。</p>
         <p><a class="download" href="https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool-update.exe">最新版の更新パッチ</a></p>
         <ol class="steps">
           <li>OBSToolを終了します。</li>

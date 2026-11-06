@@ -70,6 +70,7 @@ Discordの定期的な権限・表示名確認でチャットの枠を作り直�
 初めて使う場合は次から最新版を取得できます。
 
 - [推奨：最新版インストーラー](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool-Setup.exe)
+- [インストール不要：ZIP版（実行環境・操作ガイド一式）](https://github.com/kusaribito9310/obs_tool_distribute/releases/download/v1.0.27/OBSTool-1.0.27-folder.zip)
 - [従来の単体EXE](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool.exe)
 - [配布ページ](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest)
 
@@ -82,6 +83,8 @@ Discordデスクトップ版を起動し、実際に配信で使用するアカ�
 ### 2. OBSToolを起動する
 
 `OBSTool-Setup.exe` を起動してインストール先とショートカットを選び、導入後にOBSToolを起動します。インストール先には `Uninstall OBSTool.exe` も作成されます。従来の単体 `OBSTool.exe` を使う場合は、任意のフォルダーへ保存して直接起動できます。
+
+インストーラーを使わない場合はZIP版をダウンロードし、右クリック→「すべて展開」で解凍してください。展開した `OBSTool-folder` 内の `OBSTool.exe` から起動できます。EXEだけを取り出さず、フォルダ全体を保持してください。操作ガイドは `START_HERE.html`、ZIP版の案内は `README-ZIP.txt` に同梱しています。設定・プリセット・認証情報はインストーラー版と同じ保存先を使います。形式を切り替える場合は、起動中のOBSToolを先に終了してください。
 
 Windows SmartScreenが表示された場合は、配布元とファイル名を確認し、「詳細情報」から「実行」を選択します。現在のexeはコード署名されていないため、GitHubから取得した場合でも警告が出ることがあります。
 
@@ -261,7 +264,7 @@ OBSToolはDiscordデスクトップ版で本人を確認し、Bot経由で本人
 
 ## 最新版への更新
 
-インストーラー版は「設定」→「アプリの更新」を1回押すだけで、GitHubに新しい正式版があれば取得・署名検証して自動再起動します。更新がなければそのまま使えます。手動ファイルや復元は「手動更新・復元」から操作します。
+インストーラー版・ZIP版は「設定」→「アプリの更新」を1回押すだけで、GitHubに新しい正式版があれば取得・署名検証して自動再起動します。更新がなければそのまま使えます。手動ファイルや復元は「手動更新・復元」から操作します。
 
 以下の旧形式パッチは、従来の単体EXEだけが対象です。インストーラー版の本体には使用しないでください。
 
