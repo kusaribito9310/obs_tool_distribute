@@ -1,19 +1,21 @@
 # OBSTool 配布ページ
 
-DiscordのVC参加者とテキストチャットを、OBSのブラウザソースへ表示するWindows用ツールです。最新版は **1.0.27** です。
+DiscordのVC参加者とテキストチャットを、OBSのブラウザソースへ表示するWindows用ツールです。最新版は **1.0.28** です。
 
 ## ダウンロード
 
 - **[推奨：インストーラー OBSTool-Setup.exe](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool-Setup.exe)**
-- **[インストール不要：ZIP版（実行環境・操作ガイド一式）](https://github.com/kusaribito9310/obs_tool_distribute/releases/download/v1.0.27/OBSTool-1.0.27-folder.zip)**
+- **[インストール不要：ZIP版（実行環境・操作ガイド一式）](https://github.com/kusaribito9310/obs_tool_distribute/releases/download/v1.0.28/OBSTool-1.0.28-folder.zip)**
 - [従来の単体EXE OBSTool.exe](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool.exe)
 - [従来の単体EXE向け・全旧バージョン対応パッチ](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest/download/OBSTool-update.exe)
-- [1.0.27の署名付きアプリ内更新データ](https://github.com/kusaribito9310/obs_tool_distribute/releases/download/v1.0.27/OBSTool-1.0.27.obstool-update)
+- [1.0.28の署名付きアプリ内更新データ](https://github.com/kusaribito9310/obs_tool_distribute/releases/download/v1.0.28/OBSTool-1.0.28.obstool-update)
 - [全配布ファイル・リリースノート](https://github.com/kusaribito9310/obs_tool_distribute/releases/latest)
 
 インストーラー版と、展開してそのまま起動できるZIP版を選べます。どちらも必要な実行環境を同梱しており、Node.jsなどの追加インストールは不要です。インストーラー版はセットアップ中にデスクトップ・スタートメニューへの追加を個別に選べます。
 
 インストーラーを使わない場合はZIP版を選び、右クリック→「すべて展開」で解凍し、`OBSTool-folder` 内の `OBSTool.exe` を起動してください。EXEだけを取り出さず、フォルダ全体を保持してください。操作ガイドは `START_HERE.html` から開けます。アプリ内更新も利用でき、設定・認証情報はインストーラー版と同じ保存先を使用します。ZIP形式でもセキュリティソフトの検査対象になります。
+
+1.0.28からインストーラー版・ZIP版の実行環境とDLLを `_internal` フォルダにまとめています。表にある `OBSTool.exe` が起動用です。`_internal` は削除・移動せず、そのまま保持してください。旧版からこの構成に切り替える場合は、新しいZIPを別フォルダに展開するか、最新版インストーラーで再導入してください。アプリ内更新だけでは既存フォルダの構成は変わりません。
 
 従来の単体EXE・旧パッチの配布URLも継続します。旧パッチは単体EXE専用なので、インストーラーで導入した本体には使わないでください。
 

@@ -13,7 +13,7 @@ Node.js・npm・Electronのインストールや、コマンド操作は不要�
 
 ## 起動とOBSへの表示
 
-インストール不要のZIP版は [OBSTool-1.0.27-folder.zip](https://github.com/kusaribito9310/obs_tool_distribute/releases/download/v1.0.27/OBSTool-1.0.27-folder.zip) から取得できます。右クリック→「すべて展開」で解凍し、`OBSTool-folder` 内の `OBSTool.exe` を起動してください。実行環境・操作ガイド一式を同梱しています。EXEだけを取り出さず、フォルダ全体を保持してください。設定・認証情報はインストーラー版と共通で、ZIP版でも「設定」→「アプリの更新」を利用できます。
+インストール不要のZIP版は [OBSTool-1.0.28-folder.zip](https://github.com/kusaribito9310/obs_tool_distribute/releases/download/v1.0.28/OBSTool-1.0.28-folder.zip) から取得できます。右クリック→「すべて展開」で解凍し、`OBSTool-folder` 内の `OBSTool.exe` を起動してください。実行環境・操作ガイド一式を同梱しています。EXEだけを取り出さず、フォルダ全体を保持してください。設定・認証情報はインストーラー版と共通で、ZIP版でも「設定」→「アプリの更新」を利用できます。
 
 1. 配布された `OBSTool-<version>-portable.exe` を任意のフォルダーに保存して起動します。
 2. 利用する本人のアカウントでDiscordデスクトップ版にログインし、アプリとの連携を承認します。画面の「利用者」が自分のアカウントであることを確認してください。未認証の間はカテゴリ取得・保存・オーバーレイ表示を行いません。
